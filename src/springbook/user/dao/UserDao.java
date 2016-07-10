@@ -8,7 +8,8 @@ import java.sql.SQLException;
 
 import springbook.user.domain.User;
 
-public class UserDao {
+// getConnection을 추상메소드로 변경하였으므로, 추상클래스로 변경
+public abstract class UserDao {
 	public void add(User user) throws ClassNotFoundException, SQLException {
 		Connection c = getConnection();
 
@@ -45,7 +46,7 @@ public class UserDao {
 		return user;
 	}
 	
-	// connection을 가져오는 중복된 코드 분리.
+	// connection을 추상메소드로 변경. 구현은 서브클래스에서.
 	private Connection getConnection() throws ClassNotFoundException, SQLException {
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection c = DriverManager.getConnection("jdbc:mysql://localhost/javaweb", "root", "admin");
