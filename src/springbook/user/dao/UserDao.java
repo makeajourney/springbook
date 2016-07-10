@@ -11,8 +11,8 @@ public class UserDao {
 	private ConnectionMaker connectionMaker;
 	
 	//  클래스 생성시에 커넥션 클래스 오브젝트를 생성해서 저장.
-	public UserDao() {
-		connectionMaker = new SimpleConnectionMaker();
+	public UserDao(ConnectionMaker connectionMaker) {
+		this.connectionMaker = connectionMaker;
 	}
 	
 	public void add(User user) throws ClassNotFoundException, SQLException {
