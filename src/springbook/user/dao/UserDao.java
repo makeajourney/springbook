@@ -8,10 +8,16 @@ import java.sql.SQLException;
 
 import springbook.user.domain.User;
 
-// getConnection을 추상메소드로 변경하였으므로, 추상클래스로 변경
-public abstract class UserDao {
+public class UserDao {
+	private SimpleConnectionMaker simpleConnectionMaker;
+	
+	//  클래스 생성시에 커넥션 클래스 오브젝트를 생성해서 저장.
+	public UserDao() {
+		simpleConnectionMaker = new SimpleConnectionMaker();
+	}
+	
 	public void add(User user) throws ClassNotFoundException, SQLException {
-		Connection c = getConnection();
+		Connection c = simpleConnectionMaker.makeNewConnection();
 
 		PreparedStatement ps = c.prepareStatement("insert into users(id, name, password) values (?,?,?)");
 		ps.setString(1, user.getId());
@@ -25,7 +31,7 @@ public abstract class UserDao {
 	}
 	
 	public User get(String id) throws ClassNotFoundException, SQLException {
-		Connection c = getConnection();
+		Connection c = simpleConnectionMaker.makeNewConnection();
 		
 		PreparedStatement ps = c.prepareStatement("select * from users where id = ?");
 		ps.setString(1, id);
@@ -44,8 +50,5 @@ public abstract class UserDao {
 		c.close();
 		
 		return user;
-	}
-	
-	// connection을 추상메소드로 변경. 구현은 서브클래스에서.
-	private abstract Connection getConnection() throws ClassNotFoundException, SQLException ;
+	}	
 }
