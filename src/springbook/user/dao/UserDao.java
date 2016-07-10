@@ -47,9 +47,5 @@ public abstract class UserDao {
 	}
 	
 	// connection을 추상메소드로 변경. 구현은 서브클래스에서.
-	private Connection getConnection() throws ClassNotFoundException, SQLException {
-		Class.forName("com.mysql.jdbc.Driver");
-		Connection c = DriverManager.getConnection("jdbc:mysql://localhost/javaweb", "root", "admin");
-		return c;
-	}
+	private abstract Connection getConnection() throws ClassNotFoundException, SQLException ;
 }
