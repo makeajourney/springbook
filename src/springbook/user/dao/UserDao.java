@@ -10,8 +10,7 @@ import springbook.user.domain.User;
 public class UserDao {
 	private ConnectionMaker connectionMaker;
 	
-	//  클래스 생성시에 커넥션 클래스 오브젝트를 생성해서 저장.
-	public UserDao(ConnectionMaker connectionMaker) {
+	public void setConnectionMaker(ConnectionMaker connectionMaker) {
 		this.connectionMaker = connectionMaker;
 	}
 	
