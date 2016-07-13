@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.datasource.SingleConnectionDataSource;
+import org.springframework.test.context.ContextConfiguration;
 
 import springbook.user.domain.User;
 
@@ -32,6 +33,10 @@ public class UserDaoTest {
 		DataSource dataSource = new SingleConnectionDataSource(
 				"jdbc:mysql://localhost/testdb", "root", "admin", true);
 		dao.setDataSource(dataSource);
+		
+		JdbcContext jdbcContext = new JdbcContext();
+		jdbcContext.setDataSource(dataSource);
+		dao.setJdbcContext(jdbcContext);
 	}
 	
 	
