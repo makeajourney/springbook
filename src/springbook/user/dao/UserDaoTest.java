@@ -20,8 +20,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import springbook.user.domain.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)	// 스프링의 테스트 컨텍스트 프레임워크의 JUnit 확장기능 지정.
-@ContextConfiguration(locations="/applicationContext.xml")	// 테스트 컨텍스트가 자동으로 만들어줄 애플리케이션 컨텍스트의 위치 지정.
-@DirtiesContext		// 테스트 메소드에서 애플리케이션 컨텍스트의 구성이나 상태를 변경한다는 것을 테스트 컨텍스트 프레임워크에 알려준다.
+@ContextConfiguration(locations="/test-applicationContext.xml")	// 테스트 컨텍스트가 자동으로 만들어줄 애플리케이션 컨텍스트의 위치 지정.
 public class UserDaoTest {
 	@Autowired
 	UserDao dao;
@@ -36,10 +35,6 @@ public class UserDaoTest {
 		user1 = new User("gyumee", "박성철", "springno1");
 		user2 = new User("leegw700", "이길원", "springno2");
 		user3 = new User("bumjin", "박범진", "springno3");
-
-		DataSource dataSource = new SingleConnectionDataSource(
-				"jdbc:mysql://localhost/testdb", "root", "admin", true);	// 테스트에서 UserDao가 사용할 DataSource 오브젝트를 직접 생성한다.
-		dao.setDataSource(dataSource);	// 코드에 의한 수동 DI
 	}
 	
 	
