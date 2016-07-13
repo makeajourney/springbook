@@ -9,20 +9,12 @@ import javax.sql.DataSource;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.datasource.SingleConnectionDataSource;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import springbook.user.domain.User;
 
-@RunWith(SpringJUnit4ClassRunner.class)	// 스프링의 테스트 컨텍스트 프레임워크의 JUnit 확장기능 지정.
-@ContextConfiguration(locations="/test-applicationContext.xml")	// 테스트 컨텍스트가 자동으로 만들어줄 애플리케이션 컨텍스트의 위치 지정.
 public class UserDaoTest {
-	@Autowired
 	UserDao dao;
 	private User user1;
 	private User user2;
@@ -35,6 +27,11 @@ public class UserDaoTest {
 		user1 = new User("gyumee", "박성철", "springno1");
 		user2 = new User("leegw700", "이길원", "springno2");
 		user3 = new User("bumjin", "박범진", "springno3");
+		
+		dao = new UserDao();
+		DataSource dataSource = new SingleConnectionDataSource(
+				"jdbc:mysql://localhost/testdb", "root", "admin", true);
+		dao.setDataSource(dataSource);
 	}
 	
 	
