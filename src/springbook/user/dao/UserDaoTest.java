@@ -33,10 +33,6 @@ public class UserDaoTest {
 		DataSource dataSource = new SingleConnectionDataSource(
 				"jdbc:mysql://localhost/testdb", "root", "admin", true);
 		dao.setDataSource(dataSource);
-		
-		JdbcContext jdbcContext = new JdbcContext();
-		jdbcContext.setDataSource(dataSource);
-		dao.setJdbcContext(jdbcContext);
 	}
 	
 	
